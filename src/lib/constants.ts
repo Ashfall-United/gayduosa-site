@@ -27,4 +27,24 @@ export const INITIATIVES = [
       'https://fckzyvkbthqvmmjpvfxr.supabase.co/storage/v1/object/public/website_files/gallery/1779923284603-ga52is2uel4.jpg',
     logo: '/Logo.png',
   },
+  {
+    name: 'Forward Girls',
+    slug: 'forward-girls',
+    description:
+      'A dedicated female football programme building the next generation of Liberian women athletes — through coaching, competition, and community.',
+    href: '/forward-girls',
+    external: false,
+    image:
+      'https://fckzyvkbthqvmmjpvfxr.supabase.co/storage/v1/object/public/website_files/gallery/1779924571711-woqi98pgz9h.jpg',
+  },
+  {
+    name: 'Equal Ground',
+    slug: 'equal-ground',
+    description:
+      'A scholarship programme covering school fees and educational support for our student-athletes — because a ball and a book open every door.',
+    href: '/equal-ground',
+    external: false,
+    image:
+      'https://fckzyvkbthqvmmjpvfxr.supabase.co/storage/v1/object/public/website_files/impact-4.jpg',
+  },
 ] as const

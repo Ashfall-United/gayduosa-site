@@ -66,7 +66,9 @@ export default function Initiatives() {
                   </div>
                 ) : (
                   <div className="w-10 h-10 bg-[#01255f] flex items-center justify-center mb-5 shrink-0">
-                    <span className="text-[#fee11b] font-black text-xs tracking-tight">AU</span>
+                    <span className="text-[#fee11b] font-black text-xs tracking-tight">
+                      {initiative.name.split(' ').map((w: string) => w[0]).join('').slice(0, 2).toUpperCase()}
+                    </span>
                   </div>
                 )}
 
