@@ -55,7 +55,7 @@ function StatCard({ stat, delay }: { stat: Stat; delay: number }) {
   return (
     <div
       ref={ref}
-      className="bg-[#01255f] px-6 py-10 sm:px-8 sm:py-12 text-center hover:bg-[#1a3a7a] transition-colors cursor-default"
+      className="bg-[#01255f] px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12 text-center hover:bg-[#1a3a7a] transition-colors cursor-default"
     >
       <p
         className="text-5xl sm:text-6xl font-black text-[#fee11b] mb-3 tabular-nums leading-none"

@@ -109,7 +109,7 @@ export default function Contact() {
           </div>
 
           {/* Right — form */}
-          <div className="bg-[#f5f7fc] border border-gray-100 p-7 sm:p-10">
+          <div className="bg-[#f5f7fc] border border-gray-100 p-5 sm:p-8 lg:p-10">
             <h3
               className="text-xl font-bold text-[#01255f] mb-8"
               style={{ fontFamily: 'var(--font-heading)' }}

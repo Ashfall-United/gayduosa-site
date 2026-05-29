@@ -90,12 +90,11 @@ export default function About() {
           {/* Right — bento image collage */}
           {/* Layout: top-left large, top-right small / bottom-left small, bottom-right large */}
           <div
-            className="grid gap-2 sm:gap-3"
+            className="h-64 sm:h-80 md:h-96 lg:h-[440px] gap-2 sm:gap-3"
             style={{
               display: 'grid',
               gridTemplateColumns: '3fr 2fr',
               gridTemplateRows: '1fr 1fr',
-              height: '420px',
             }}
           >
             {/* img1 — top-left, large */}

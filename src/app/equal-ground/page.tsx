@@ -185,7 +185,7 @@ export default function EqualGroundPage() {
             >
               End-to-End Educational Support
             </h2>
-            <div className="grid sm:grid-cols-3 gap-6 lg:gap-8">
+            <div className="grid sm:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
               {covers.map((item) => (
                 <div
                   key={item.title}
@@ -226,7 +226,7 @@ export default function EqualGroundPage() {
             >
               How You Can Contribute
             </h2>
-            <div className="grid sm:grid-cols-3 gap-5 sm:gap-6">
+            <div className="grid sm:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
               {ways.map((way) => (
                 <div
                   key={way.title}
@@ -261,7 +261,7 @@ export default function EqualGroundPage() {
 
         {/* Bottom CTA */}
         <div className="bg-white py-14 sm:py-16">
-          <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6">
             <div>
               <h3
                 className="text-2xl font-bold text-[#01255f] mb-1"
