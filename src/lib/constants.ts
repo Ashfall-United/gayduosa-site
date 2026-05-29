@@ -35,7 +35,7 @@ export const INITIATIVES = [
     href: '/forward-girls',
     external: false,
     image:
-      'https://fckzyvkbthqvmmjpvfxr.supabase.co/storage/v1/object/public/website_files/gallery/1779924571711-woqi98pgz9h.jpg',
+      'https://fckzyvkbthqvmmjpvfxr.supabase.co/storage/v1/object/public/website_files/IMG_9809.JPG',
   },
   {
     name: 'Equal Ground',
@@ -45,6 +45,6 @@ export const INITIATIVES = [
     href: '/equal-ground',
     external: false,
     image:
-      'https://fckzyvkbthqvmmjpvfxr.supabase.co/storage/v1/object/public/website_files/impact-4.jpg',
+      'https://fckzyvkbthqvmmjpvfxr.supabase.co/storage/v1/object/public/website_files/rep.jpg',
   },
 ] as const

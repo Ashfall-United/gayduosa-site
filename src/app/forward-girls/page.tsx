@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 const HERO_IMAGE =
-  'https://fckzyvkbthqvmmjpvfxr.supabase.co/storage/v1/object/public/website_files/gallery/1779924571711-woqi98pgz9h.jpg'
+  'https://fckzyvkbthqvmmjpvfxr.supabase.co/storage/v1/object/public/website_files/IMG_9809.JPG'
 
 const pillars = [
   {
