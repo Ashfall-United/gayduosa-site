@@ -1,0 +1,47 @@
+import { ORG_NAME, SITE_URL } from '@/lib/constants'
+
+export type DonationShareVariant = 'completed' | 'invite'
+
+export type DonationShareOptions = {
+  readonly firstName?: string
+  readonly amountFormatted?: string
+}
+
+export function getDonatePageUrl(): string {
+  return `${SITE_URL}/donate`
+}
+
+export function buildDonationShareMessage(
+  variant: DonationShareVariant,
+  donateUrl: string,
+  options?: DonationShareOptions
+): string {
+  if (variant === 'completed') {
+    const name = options?.firstName?.trim()
+    const amount = options?.amountFormatted
+    const giftLine = amount
+      ? `I just donated ${amount} to ${ORG_NAME}`
+      : `I just made a donation to ${ORG_NAME}`
+
+    const who = name ? `${giftLine} — ${name} here.` : `${giftLine}.`
+    return `${who} I'm helping young people in Liberia access sport, education, and community programmes that create real opportunity. Every gift matters — join me and make an impact: ${donateUrl}`
+  }
+
+  return `Make an impact in the life of a young person in Liberia. ${ORG_NAME} uses the power of sport to connect youth to education, wellbeing, and a brighter future. Donate today or share this link to spread the mission: ${donateUrl}`
+}
+
+export function buildTwitterShareUrl(text: string): string {
+  return `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`
+}
+
+export function buildWhatsAppShareUrl(text: string): string {
+  return `https://wa.me/?text=${encodeURIComponent(text)}`
+}
+
+export function buildFacebookShareUrl(url: string): string {
+  return `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`
+}
+
+export function buildLinkedInShareUrl(url: string): string {
+  return `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`
+}

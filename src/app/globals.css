@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+/* ─── Custom breakpoints ─────────────────────────────────── */
+@theme {
+  --breakpoint-xs: 30rem; /* 480px */
+}
+
+/* ─── Design tokens ──────────────────────────────────────── */
+:root {
+  --blue: #01255f;
+  --blue-dark: #011840;
+  --blue-mid: #1a3a7a;
+  --yellow: #fee11b;
+  --yellow-dark: #e5ca10;
+  --off-white: #f5f7fc;
+  --text: #0d0d0d;
+  --text-muted: #5a6478;
+}
+
+@theme inline {
+  --color-background: #ffffff;
+  --color-foreground: var(--text);
+  --color-blue: var(--blue);
+  --color-blue-dark: var(--blue-dark);
+  --color-yellow: var(--yellow);
+}
+
+/* ─── Base ───────────────────────────────────────────────── */
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: #ffffff;
+  color: var(--text);
+  font-family: var(--font-body), 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#about, #initiatives, #impact, #contact {
+  scroll-margin-top: 5.5rem;
+}
+@media (min-width: 1024px) {
+  #about, #initiatives, #impact, #contact {
+    scroll-margin-top: 5.75rem;
+  }
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 2px; }
+
+/* ─── Focus ──────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: 3px;
+}
+
+/* ─── Keyframes ──────────────────────────────────────────── */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(-18px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes lineExpand {
+  from { transform: scaleX(0); transform-origin: left; }
+  to   { transform: scaleX(1); transform-origin: left; }
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Animation utilities ────────────────────────────────── */
+
+/* fill-mode: both = apply "from" state before delay fires */
+.fade-in-up   { animation: fadeUp    0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.fade-in      { animation: fadeIn    0.6s ease both; }
+.slide-right  { animation: slideRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.count-up     { animation: countUp   0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+/* ─── Label utilities ────────────────────────────────────── */
+
+.label-light {
+  display: inline-block;
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  color: #fee11b;
+  margin-bottom: 0.5rem;
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  color: var(--yellow);
+  background: var(--blue);
+  padding: 0.375rem 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+/* ─── Image zoom utility ─────────────────────────────────── */
+
+.img-zoom img {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.img-zoom:hover img { transform: scale(1.04); }
