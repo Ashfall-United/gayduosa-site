@@ -73,7 +73,14 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: SITE_HOME_TITLE,
     description: ORG_DESCRIPTION,
-    images: [OG_IMAGE],
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: `${ORG_NAME} — Sport for Social Change in Liberia`,
+      },
+    ],
   },
   icons: {
     icon: '/favicon.png',
