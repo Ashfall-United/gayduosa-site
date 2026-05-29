@@ -31,7 +31,7 @@ const covers = [
     Icon: Handshake,
     title: 'Career Transition',
     description:
-      'We don't just fund school — we walk alongside athletes as they move into professional life, with mentorship, workshops, and employer connections.',
+      "We don't just fund school — we walk alongside athletes as they move into professional life, with mentorship, workshops, and employer connections.",
   },
 ]
 
