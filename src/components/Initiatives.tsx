@@ -39,7 +39,7 @@ export default function Initiatives() {
             >
               {/* Cover image */}
               {'image' in initiative && (
-                <div className="relative h-32 sm:h-44 lg:h-52 shrink-0 overflow-hidden">
+                <div className="relative h-52 sm:h-52 lg:h-56 shrink-0 overflow-hidden">
                   <Image
                     src={initiative.image}
                     alt={initiative.name}
