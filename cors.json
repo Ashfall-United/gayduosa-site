@@ -1,0 +1,13 @@
+[
+  {
+    "origin": [
+      "http://localhost:3000",
+      "https://gayduosa.com",
+      "https://gayduosa.org",
+      "https://www.gayduosa.com",
+      "https://www.gayduosa.org"
+    ],
+    "method": ["GET", "POST", "PUT", "DELETE", "HEAD"],
+    "maxAgeSeconds": 3600
+  }
+]
