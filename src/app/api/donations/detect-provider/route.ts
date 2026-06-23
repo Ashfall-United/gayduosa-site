@@ -18,7 +18,9 @@ export async function GET(req: NextRequest) {
 
     // Call Dollr predictions API to detect provider
     try {
+      console.log('[Detect Provider] Getting token...')
       const token = await dollr.getAccessToken()
+      console.log('[Detect Provider] Token obtained, calling Dollr API with phone:', phone)
 
       const response = await fetch(
         `https://api.heydollr.app/v1/predictions/mmo-provider-info?phone=${encodeURIComponent(phone)}&operation_type=COLLECTION`,
@@ -29,10 +31,13 @@ export async function GET(req: NextRequest) {
         }
       )
 
+      console.log('[Detect Provider] Dollr response status:', response.status)
+
       if (!response.ok) {
-        console.error('Dollr prediction error:', response.status, response.statusText)
+        const errorText = await response.text()
+        console.error('Dollr prediction error:', response.status, response.statusText, errorText)
         return NextResponse.json(
-          { error: 'Failed to detect provider' },
+          { error: `Failed to detect provider: ${response.status} ${response.statusText}`, details: errorText },
           { status: response.status }
         )
       }
@@ -51,9 +56,10 @@ export async function GET(req: NextRequest) {
       console.log('[Detect Provider] Returning:', JSON.stringify(result, null, 2))
       return NextResponse.json(result)
     } catch (error) {
-      console.error('Dollr API error:', error)
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      console.error('Dollr API error:', errorMessage, error)
       return NextResponse.json(
-        { error: 'Failed to detect provider' },
+        { error: 'Failed to detect provider', details: errorMessage },
         { status: 500 }
       )
     }
