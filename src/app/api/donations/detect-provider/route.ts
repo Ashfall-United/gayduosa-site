@@ -44,17 +44,11 @@ export async function GET(req: NextRequest) {
 
       const data = await response.json()
       console.log('[Detect Provider] Dollr API response:', JSON.stringify(data, null, 2))
-      console.log('[Detect Provider] gateway_provider:', data.gateway_provider)
-      console.log('[Detect Provider] full response keys:', Object.keys(data))
 
-      // Return the full response for debugging
-      const result = {
-        provider: data.gateway_provider,
+      return NextResponse.json({
+        provider: data.payment_method,
         method: data.payment_method,
-        fullResponse: data,
-      }
-      console.log('[Detect Provider] Returning:', JSON.stringify(result, null, 2))
-      return NextResponse.json(result)
+      })
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : String(error)
       console.error('Dollr API error:', errorMessage, error)
