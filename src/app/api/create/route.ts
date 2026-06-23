@@ -233,7 +233,7 @@ export async function POST(req: NextRequest): Promise<NextResponse<DonationRespo
           {
             success: true,
             donationId: tempDonationId,
-            status: 'pending',
+            status: 'awaiting_payment',
             paymentUrl: paymentUrl,
           },
           { status: 201 }
@@ -333,11 +333,16 @@ export async function POST(req: NextRequest): Promise<NextResponse<DonationRespo
 
       // Step 6: Save to Supabase (non-blocking)
       try {
+        const donorId = `${input.email}-${referenceId}`
         await saveDonationToSupabase(
-          { ...input, mobilePhone: input.paymentMethod === 'mobile' ? formatPhoneForDollr(input.mobilePhone!) : input.mobilePhone },
+          donationId,
+          donorId,
+          input.amountUsd,
+          input.paymentMethod,
+          input.coverFees,
           ipAddress,
           referenceId,
-          donationId
+          input.message
         )
       } catch (error) {
         console.warn('Supabase save error (non-fatal):', error)

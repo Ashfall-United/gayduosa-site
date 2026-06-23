@@ -15,6 +15,8 @@ export const ORG_LINKEDIN = 'https://www.linkedin.com/company/gayduosa/'
 export const ORG_DESCRIPTION =
   'Gayduo Sports Association — a social enterprise using sport to unlock opportunity for young people.'
 
+export const DONATE_OG_IMAGE = 'https://www.gayduosa.org/og-donate.png'
+
 export const INITIATIVES = [
   {
     name: 'Ashfall United',

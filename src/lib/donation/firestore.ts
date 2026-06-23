@@ -1,6 +1,6 @@
 import { Timestamp } from 'firebase-admin/firestore'
 import { getAdminDb } from '@/lib/firebase-admin'
-import type { Donation, DonationStatus } from '@/types/donation'
+import type { Donation, DonationStatus, Donor } from '@/types/donation'
 import { DONATION_STATUS, PROCESSING_FEE_RATE, RETRY_EXPIRY_HOURS } from './constants'
 
 const DONATIONS_COLLECTION = 'donations'
@@ -93,6 +93,37 @@ export async function getDonation(id: string): Promise<Donation | null> {
 }
 
 /**
+ * Retrieves a single donor by ID
+ * @param id - The document ID of the donor
+ * @returns The Donor object or null if not found
+ */
+export async function getDonor(id: string): Promise<Donor | null> {
+  try {
+    const db = getAdminDb()
+    const docSnap = await db.collection('donors').doc(id).get()
+
+    if (!docSnap.exists) {
+      return null
+    }
+
+    const data = docSnap.data()
+    return {
+      id: docSnap.id,
+      firstName: data?.firstName || '',
+      lastName: data?.lastName || '',
+      email: data?.email || '',
+      phone: data?.phone || '',
+      country: data?.country || '',
+      createdAt: data?.createdAt,
+      updatedAt: data?.updatedAt,
+    }
+  } catch (error) {
+    console.error('Error getting donor from Firestore:', error)
+    throw error
+  }
+}
+
+/**
  * Updates the status of a donation
  * @param id - The document ID of the donation
  * @param status - The new DonationStatus
@@ -141,7 +172,7 @@ export async function queryPendingDonations(): Promise<Donation[]> {
 
     const querySnapshot = await db
       .collection(DONATIONS_COLLECTION)
-      .where('status', 'in', [DONATION_STATUS.PENDING, DONATION_STATUS.PROCESSING])
+      .where('status', 'in', [DONATION_STATUS.AWAITING_PAYMENT, DONATION_STATUS.PROCESSING])
       .get()
 
     const donations: Donation[] = []
