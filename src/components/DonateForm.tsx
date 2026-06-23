@@ -127,10 +127,15 @@ export default function DonateForm() {
     setIsDetectingProvider(true)
     try {
       const formattedPhone = formatPhoneForDollr(phone)
+      console.log('[DonateForm] Detecting provider for phone:', formattedPhone)
       const response = await fetch(`/api/donations/detect-provider?phone=${encodeURIComponent(formattedPhone)}`)
       const data = await response.json()
+      console.log('[DonateForm] Provider detection response:', data)
       if (data.provider) {
+        console.log('[DonateForm] Setting detected provider:', data.provider)
         setDetectedProvider(data.provider)
+      } else {
+        console.warn('[DonateForm] No provider in response')
       }
     } catch (error) {
       console.error('Failed to detect provider:', error)

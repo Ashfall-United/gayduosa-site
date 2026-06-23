@@ -38,6 +38,8 @@ export async function GET(req: NextRequest) {
       }
 
       const data = await response.json()
+      console.log('[Detect Provider] Dollr API response:', JSON.stringify(data, null, 2))
+      console.log('[Detect Provider] gateway_provider:', data.gateway_provider)
       return NextResponse.json({
         provider: data.gateway_provider,
         method: data.payment_method,
