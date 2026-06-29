@@ -11,7 +11,7 @@ import {
   markEmailSentSupabase,
   logEmail,
 } from '@/lib/donation/supabase'
-import { dollr } from '@/lib/donation/dollr'
+import { dollr, mapDollrStatus } from '@/lib/donation/dollr'
 import { sendThankYouEmail } from '@/lib/donation/email'
 import { RETRY_SCHEDULE_MINUTES, RETRY_EXPIRY_HOURS, DONATION_STATUS } from '@/lib/donation/constants'
 import type { Donation } from '@/types/donation'
@@ -67,10 +67,10 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     for (const donation of pendingDonations) {
       try {
         // 4a: Get payment status from Dollr
-        let paymentStatus: string
+        let dollrRawStatus: string
         try {
           const statusResponse = await dollr.getPaymentStatus(donation.referenceId)
-          paymentStatus = statusResponse.status
+          dollrRawStatus = statusResponse.status
         } catch (error) {
           // 4d: On error, check retry logic
           console.error(`[Cron] Error getting status for donation ${donation.id}:`, error)
@@ -118,17 +118,19 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
           continue
         }
 
-        // 4b: Log status
-        console.log(`[Cron] Donation ${donation.id}: ${paymentStatus}`)
+        // 4b: Map Dollr's raw status (e.g. "SUCCESSFUL") to the app's status,
+        // then log
+        const paymentStatus = mapDollrStatus(dollrRawStatus)
+        console.log(`[Cron] Donation ${donation.id}: ${dollrRawStatus} → ${paymentStatus}`)
 
-        // 4c: Check if status changed
-        if (paymentStatus !== donation.dollrStatus) {
+        // 4c: Check if the underlying Dollr status changed
+        if (dollrRawStatus !== donation.dollrStatus) {
           try {
-            // Update Firestore
-            await updateDonationStatus(donation.id, paymentStatus as any, paymentStatus)
+            // Update Firestore (app status + raw Dollr status for the record)
+            await updateDonationStatus(donation.id, paymentStatus, dollrRawStatus)
 
             // Update Supabase
-            await updateSupabaseDonation(donation.id, paymentStatus as any, paymentStatus)
+            await updateSupabaseDonation(donation.id, paymentStatus, dollrRawStatus)
 
             console.log(
               `[Cron] Updated donation ${donation.id} status from ${donation.dollrStatus} to ${paymentStatus}`

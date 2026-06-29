@@ -3,6 +3,23 @@
  * Handles payment processing for donations via Dollr
  */
 
+import { DONATION_STATUS } from './constants'
+import type { DonationStatus } from '@/types/donation'
+
+// Dollr's collection-status endpoint returns "SUCCESSFUL" on a completed payment
+// (NOT "COMPLETED" — that value never appears in Dollr's API). Map its raw status
+// vocabulary to the app's donation status so polling actually completes donations.
+const DOLLR_SUCCESS_STATUSES = new Set(['SUCCESSFUL', 'COMPLETED'])
+const DOLLR_FAILURE_STATUSES = new Set(['FAILED', 'CANCELED', 'CANCELLED', 'EXPIRED'])
+
+/** Map a raw Dollr collection status to the app's DonationStatus. */
+export function mapDollrStatus(rawStatus: string): DonationStatus {
+  const s = (rawStatus || '').toUpperCase()
+  if (DOLLR_SUCCESS_STATUSES.has(s)) return DONATION_STATUS.COMPLETED
+  if (DOLLR_FAILURE_STATUSES.has(s)) return DONATION_STATUS.FAILED
+  return DONATION_STATUS.PROCESSING
+}
+
 interface TokenResponse {
   access_token: string
   expires_in: number
